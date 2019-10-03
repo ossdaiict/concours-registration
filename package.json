@@ -1,0 +1,30 @@
+{
+  "name": "concours-registration",
+  "version": "1.0.0",
+  "description": "Registration App for Concours, the Sports Fest of DA-IICT",
+  "main": "server.js",
+  "scripts": {
+    "server:start": "nodemon --exec ts-node server.ts",
+    "server:build": "ts-node scripts/build.ts",
+    "client:start": "cd client && yarn start",
+    "client:build": "cd client && yarn build"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Mohamed Shadab",
+    "url": "https://www.github.com/shadxx7"
+  },
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@types/express": "^4.17.1",
+    "@types/node": "^12.7.9",
+    "@types/shelljs": "^0.8.5",
+    "nodemon": "^1.19.3",
+    "shelljs": "^0.8.3",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
