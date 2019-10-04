@@ -1455,6 +1455,13 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.9.tgz#da0210f91096aa67138cf5afd04c4d629f8a406a"
   integrity sha512-P57oKTJ/vYivL2BCfxCC5tQjlS8qW31pbOL6qt99Yrjm95YdHgNZwjrTTjMBh+C2/y6PXIX4oz253+jUzxKKfQ==
 
+"@types/nodemailer@^6.2.1":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@types/nodemailer/-/nodemailer-6.2.1.tgz#8f089bf0ef826f04b9d8dd8750233b04978cb675"
+  integrity sha512-6f46rxxaFwyOW39psPoQiM7jHjL7apDRNT5WPHIuv+TZFv+7sBGSI9J7blIC3/NWff4O9/VSzgoQtO6aPLUdvQ==
+  dependencies:
+    "@types/node" "*"
+
 "@types/prop-types@*":
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
@@ -4861,14 +4868,6 @@ globby@^6.1.0:
     object-assign "^4.0.1"
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
-
-gmail-send@^1.8.10:
-  version "1.8.10"
-  resolved "https://registry.yarnpkg.com/gmail-send/-/gmail-send-1.8.10.tgz#e228f3680590ec090eb7d0de8041494f26843b39"
-  integrity sha512-QMpWwzeA64U69HzOEzI37UNc73xXkhTg8LuqsfKX9W7LjiQY3yRvViVn7ZhuJWLTV4136vsLJf2sXiZKmdykbw==
-  dependencies:
-    lodash "^4.17.15"
-    nodemailer "^6.3.0"
 
 got@^6.7.1:
   version "6.7.1"
