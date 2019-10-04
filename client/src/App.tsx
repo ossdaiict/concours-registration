@@ -57,7 +57,7 @@ const App: React.FC = () => {
           onSubmit={async (values, actions) => {
             await axios({
               method: 'post',
-              url: `https://concours-registration.herokuapp.com/register`,
+              url: `http://localhost:5000/register`,
               data: values,
             })
               .then(res => toast.success('Successfully Registered'))

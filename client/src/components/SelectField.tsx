@@ -18,9 +18,11 @@ const SelectField: React.SFC<any & FieldProps> = ({ options, field, form }) => {
           : ''
       }
       onChange={(option: any) => {
-        form.setFieldValue(field.name, option)
-        let sum = option.reduce((sum: any, item: any) => sum + item.cost, 0)
-        setTotal(sum)
+        if (option) {
+          form.setFieldValue(field.name, option)
+          let sum = option.reduce((sum: any, item: any) => sum + item.cost, 0)
+          setTotal(sum)
+        }
       }}
       onBlur={field.onBlur}
       className="w-full"

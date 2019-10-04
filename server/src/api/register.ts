@@ -33,6 +33,10 @@ router.post('/', function(req, res) {
   Registration.create(data)
     .then(data => {
       send({ to: req.body.email })
+        .then((result: any) => {
+          console.log(result)
+        })
+        .catch((err: any) => console.log(err))
       res.send('Successfully registered')
     })
     .catch(err => res.send('Something went wrong'))
