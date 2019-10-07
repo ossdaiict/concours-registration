@@ -3,18 +3,26 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import registerApi from './api/register'
+import morgan from 'morgan'
+import helmet from 'helmet'
 
 // Initializes dotenv
 dotenv.config()
 
-//Creating the express app
+// Creating the express app
 const app = express()
 
-// JSON Payload Parser
-app.use(express.json())
+// Morgan for logging
+app.use(morgan('tiny'))
+
+// Helmet for security
+app.use(helmet())
 
 // CORS
 app.use(cors())
+
+// JSON Payload Parser
+app.use(express.json())
 
 // API
 app.use('/register', registerApi)

@@ -4,22 +4,22 @@ import { Grid, Row } from 'react-flexbox-grid'
 import { year } from './meta.json'
 import axios from 'axios'
 import SelectField from './components/SelectField'
-import { CostContext } from './CostContext'
+import { CostContext } from './context/CostContext'
 import './App.css'
 import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 toast.configure()
 
+const API_URL: string = process.env.REACT_APP_API_URL || 'http://localhost:5000'
+
 const sportsOptions = [
   { label: 'Badminton(Boys)', value: 'Badminton(Boys)', cost: 1800 },
   { label: 'Badminton(Girls)', value: 'Badminton(Girls)', cost: 1200 },
   { label: 'Basketball(Boys)', value: 'Basketball(Boys)', cost: 1600 },
   { label: 'Basketball(Girls)', value: 'Basketball(Girls)', cost: 1200 },
-  { label: 'Chess(Boys)', value: 'Chess(Boys)', cost: 1200 },
-  { label: 'Chess(Girls)', value: 'Chess(Girls)', cost: 1200 },
-  { label: 'Carrom(Boys)', value: 'Carrom(Boys)', cost: 1200 },
-  { label: 'Carrom(Girls)', value: 'Carrom(Girls)', cost: 1200 },
+  { label: 'Chess', value: 'Chess', cost: 1200 },
+  { label: 'Carrom', value: 'Carrom', cost: 1200 },
   { label: 'Cricket(Boys)', value: 'Cricket(Boys)', cost: 4000 },
   { label: 'Cricket(Girls)', value: 'Cricket(Girls)', cost: 1200 },
   { label: 'Volleyball(Boys)', value: 'Volleyball(Boys)', cost: 1800 },
@@ -28,9 +28,20 @@ const sportsOptions = [
   { label: 'Football(Girls)', value: 'Football(Girls)', cost: 1400 },
   { label: 'Table Tennis(Boys)', value: 'Table Tennis(Boys)', cost: 1600 },
   { label: 'Table Tennis(Girls)', value: 'Table Tennis(Girls)', cost: 1200 },
-  { label: 'Tennis(Boys)', value: 'Badminton(Boys)', cost: 1600 },
-  { label: 'Tennis(Girls)', value: 'Badminton(Girls)', cost: 1200 },
+  { label: 'Lawn Tennis(Boys)', value: 'Lawn Tennis(Boys)', cost: 1600 },
+  { label: 'Lawn Tennis(Girls)', value: 'Lawn Tennis(Girls)', cost: 1200 },
 ]
+
+const paymentOptions = [
+  { label: 'Cash', value: 'Cash' },
+  { label: 'Bank Transfer', value: 'Bank Transfer' },
+]
+
+function onKeyDown(keyEvent: any) {
+  if ((keyEvent.charCode || keyEvent.keyCode) === 13) {
+    keyEvent.preventDefault()
+  }
+}
 
 const App: React.FC = () => {
   const [total, setTotal] = useState(0)
@@ -48,17 +59,21 @@ const App: React.FC = () => {
           initialValues={{
             name: '',
             collegeName: '',
-            contactNo: 0,
+            contactNo: '',
             email: '',
             accommodation: 0,
-            prefPayment: 'Cash',
+            prefPayment: '',
             sports: [],
           }}
           onSubmit={async (values, actions) => {
+            const data = {
+              ...values,
+              totalCost: total,
+            }
             await axios({
               method: 'post',
-              url: `http://localhost:5000/register`,
-              data: values,
+              url: `${API_URL}/register`,
+              data,
             })
               .then(res => toast.success('Successfully Registered'))
               .catch(err =>
@@ -66,13 +81,17 @@ const App: React.FC = () => {
               )
           }}
           render={({ errors, status, touched, isSubmitting }) => (
-            <Form style={{ textAlign: 'left', fontSize: 20 }}>
+            <Form
+              style={{ textAlign: 'left', fontSize: 20 }}
+              onKeyDown={onKeyDown}
+            >
               <Row className="m-5">
                 <label>Name (contingent leader/captain of team)</label>
                 <Field
                   type="text"
                   name="name"
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  required
                 />
                 <ErrorMessage name="name" component="div" />
               </Row>
@@ -82,6 +101,7 @@ const App: React.FC = () => {
                   type="text"
                   name="collegeName"
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  required
                 />
                 <ErrorMessage name="collegeName" component="div" />
               </Row>
@@ -91,6 +111,7 @@ const App: React.FC = () => {
                   type="number"
                   name="contactNo"
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  required
                 />
                 <ErrorMessage name="contactNo" component="div" />
               </Row>
@@ -100,17 +121,9 @@ const App: React.FC = () => {
                   type="email"
                   name="email"
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  required
                 />
                 <ErrorMessage name="email" component="div" />
-              </Row>
-              <Row className="m-5">
-                <label htmlFor="sports">Sports</label>
-                {/* <Select name="sports" options={sportsOptions} /> */}
-                <Field
-                  name="sports"
-                  component={SelectField}
-                  options={sportsOptions}
-                />
               </Row>
               <Row className="m-5">
                 <label htmlFor="accommodation">
@@ -120,15 +133,33 @@ const App: React.FC = () => {
                   type="number"
                   name="accommodation"
                   className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                  required
+                />
+              </Row>
+
+              <Row className="m-5">
+                <label htmlFor="sports">Sports</label>
+                <Field
+                  name="sports"
+                  component={SelectField}
+                  options={sportsOptions}
+                  multi={true}
+                  required
                 />
               </Row>
               <Row className="m-5">
                 <label htmlFor="prefPayment">Preferred Payment Method</label>
                 <Field
-                  type="text"
+                  type="select"
+                  component={SelectField}
+                  options={paymentOptions}
                   name="prefPayment"
-                  className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-                />
+                  multi={false}
+                  required
+                >
+                  <option value="Cash">Cash</option>
+                  <option value="Bank Transfer">Bank Transfer</option>
+                </Field>
               </Row>
               <Row className="m-5">
                 <button
@@ -145,6 +176,7 @@ const App: React.FC = () => {
           )}
         />
       </CostContext.Provider>
+      <br />
     </Grid>
   )
 }
