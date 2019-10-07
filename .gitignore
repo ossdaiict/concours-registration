@@ -98,3 +98,9 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/sendgrid.env
+
+# Now deployment file
+now.json
+
+# React and Node build
+build

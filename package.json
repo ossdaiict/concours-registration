@@ -13,7 +13,8 @@
   "scripts": {
     "client:start": "cd client&&yarn start",
     "client:build": "cd client&&yarn build",
-    "server:start": "cd server&&yarn start",
-    "server:build": "cd server&&yarn build"
+    "server:dev": "cd server&&yarn dev",
+    "server:build": "cd server&&yarn build",
+    "server:start": "cd server&&yarn server"
   }
 }
