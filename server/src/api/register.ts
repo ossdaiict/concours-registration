@@ -8,8 +8,11 @@ dotenv.config()
 const router = express.Router()
 
 const SENDGRID_API_KEY: string = process.env.SENDGRID_API_KEY || ''
+const PASSWORD: string = process.env.PASSWORD || ''
 
 sgMail.setApiKey(SENDGRID_API_KEY)
+
+let count = 0
 
 router.post('/', function(req, res) {
   const msg = {
@@ -63,6 +66,22 @@ router.post('/', function(req, res) {
       console.log(err)
       res.status(500).send('Something went wrong')
     })
+})
+
+router.post('/details', function(req, res) {
+  console.log('aagaya request', req.body.password)
+  if (req.body.password === PASSWORD && count < 100) {
+    console.log('password bhi correct')
+    Registration.find()
+      .exec()
+      .then(data => {
+        res.status(200).send(data)
+      })
+      .catch(err => {
+        console.log(err)
+        res.status(500).send('')
+      })
+  } else count += 1
 })
 
 export default router
