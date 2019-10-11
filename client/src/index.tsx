@@ -1,19 +1,22 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom'
 import { HashRouter as Router, Switch, Route } from 'react-router-dom'
-import Registration from './pages/registration'
-import Admin from './pages/admin'
 import * as serviceWorker from './serviceWorker'
 import 'tailwindcss/dist/tailwind.min.css'
 import './index.css'
 
+const Registration = lazy(() => import('./pages/registration'))
+const Admin = lazy(() => import('./pages/admin'))
+
 const App = () => (
-  <Router>
-    <Switch>
-      <Route path="/" component={Registration} exact />
-      <Route path="/admin" component={Admin} exact />
-    </Switch>
-  </Router>
+  <Suspense fallback={<div>Loading...</div>}>
+    <Router>
+      <Switch>
+        <Route path="/" component={Registration} exact />
+        <Route path="/admin" component={Admin} exact />
+      </Switch>
+    </Router>
+  </Suspense>
 )
 
 ReactDOM.render(<App />, document.getElementById('root'))
