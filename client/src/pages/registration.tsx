@@ -3,11 +3,11 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Grid, Row } from 'react-flexbox-grid'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { year } from './meta.json'
-import SelectField from './components/SelectField'
-import { CostContext } from './context/CostContext'
+import { year } from '../meta.json'
+import SelectField from '../components/SelectField'
+import { CostContext } from '../context/CostContext'
 import 'react-toastify/dist/ReactToastify.css'
-import './App.css'
+import './registration.css'
 
 toast.configure()
 
@@ -43,7 +43,7 @@ function onKeyDown(keyEvent: any) {
   }
 }
 
-const App: React.FC = () => {
+const Registration: React.FC = () => {
   const [total, setTotal] = useState(0)
 
   return (
@@ -181,4 +181,4 @@ const App: React.FC = () => {
   )
 }
 
-export default App
+export default Registration

@@ -1,12 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import App from './App'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
+import Registration from './pages/registration'
+import Admin from './pages/admin'
 import * as serviceWorker from './serviceWorker'
 import 'tailwindcss/dist/tailwind.min.css'
 import './index.css'
-import Admin from './Admin'
 
-ReactDOM.render(<Admin />, document.getElementById('root'))
+const App = () => (
+  <Router>
+    <Switch>
+      <Route path="/" component={Registration} exact />
+      <Route path="/admin" component={Admin} exact />
+    </Switch>
+  </Router>
+)
+
+ReactDOM.render(<App />, document.getElementById('root'))
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
