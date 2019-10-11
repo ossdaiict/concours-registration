@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Grid, Row } from 'react-flexbox-grid'
-import { year } from './meta.json'
 import axios from 'axios'
+import { toast } from 'react-toastify'
+import { year } from './meta.json'
 import SelectField from './components/SelectField'
 import { CostContext } from './context/CostContext'
-import './App.css'
-import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import './App.css'
 
 toast.configure()
 
@@ -26,7 +26,7 @@ const sportsOptions = [
   { label: 'Volleyball(Girls)', value: 'Volleyball(Girls)', cost: 1200 },
   { label: 'Football(Boys)', value: 'Football(Boys)', cost: 2800 },
   { label: 'Football(Girls)', value: 'Football(Girls)', cost: 1400 },
-  { label: 'Table Tennis(Boys)', value: 'Table Tennis(Boys)', cost: 1600 },
+  { label: 'Table Tennis(Boys)', value: 'Table Tennis(Boys)', cost: 1800 },
   { label: 'Table Tennis(Girls)', value: 'Table Tennis(Girls)', cost: 1200 },
   { label: 'Lawn Tennis(Boys)', value: 'Lawn Tennis(Boys)', cost: 1600 },
   { label: 'Lawn Tennis(Girls)', value: 'Lawn Tennis(Girls)', cost: 1200 },
