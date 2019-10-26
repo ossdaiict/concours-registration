@@ -3,7 +3,6 @@ import { Formik, Form, Field, ErrorMessage } from 'formik'
 import { Grid, Row } from 'react-flexbox-grid'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { year } from '../meta.json'
 import SelectField from '../components/SelectField'
 import { CostContext } from '../context/CostContext'
 import 'react-toastify/dist/ReactToastify.css'
@@ -49,7 +48,7 @@ const Registration: React.FC = () => {
   return (
     <Grid fluid className="App">
       <br />
-      <span className="text-5xl font-bold">Concours Registration {year}</span>
+      <span className="text-5xl font-bold">Concours Registration 2019</span>
 
       <CostContext.Provider
         //@ts-ignore
