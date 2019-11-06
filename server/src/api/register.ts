@@ -69,9 +69,7 @@ router.post('/', function(req, res) {
 })
 
 router.post('/details', function(req, res) {
-  console.log('aagaya request', req.body.password)
   if (req.body.password === PASSWORD && count < 100) {
-    console.log('password bhi correct')
     Registration.find()
       .exec()
       .then(data => {
