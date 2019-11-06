@@ -30,8 +30,10 @@ app.use('/register', registerApi)
 // Connect to MongoDB
 const dbUrl: string = process.env.DB_URL || ''
 const dbName: string = process.env.DB_NAME || ''
-mongoose.set('useUnifiedTopology', true)
-mongoose.connect(dbUrl, { useNewUrlParser: true, dbName })
+mongoose.connect(dbUrl, {
+  useNewUrlParser: true,
+  dbName,
+})
 mongoose.set('debug', true)
 const db = mongoose.connection
 db.on('error', console.log.bind(console, 'MongoDB Error: \n'))

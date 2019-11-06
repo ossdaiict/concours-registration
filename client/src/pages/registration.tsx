@@ -50,10 +50,7 @@ const Registration: React.FC = () => {
       <br />
       <span className="text-5xl font-bold">Concours Registration 2019</span>
 
-      <CostContext.Provider
-        //@ts-ignore
-        value={{ total, setTotal }}
-      >
+      <CostContext.Provider value={{ total, setTotal }}>
         <Formik
           initialValues={{
             name: '',

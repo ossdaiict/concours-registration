@@ -9,7 +9,6 @@ const SelectField: React.SFC<any & FieldProps> = ({
   form,
   multi,
 }) => {
-  //@ts-ignore
   const { setTotal } = useContext(CostContext)
 
   return (
