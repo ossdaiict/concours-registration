@@ -32,6 +32,7 @@ const dbUrl: string = process.env.DB_URL || ''
 const dbName: string = process.env.DB_NAME || ''
 mongoose.connect(dbUrl, {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
   dbName,
 })
 mongoose.set('debug', true)
